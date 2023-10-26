@@ -1,0 +1,49 @@
+---
+title: "nBackEffectSizeAnalysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Loading necessary files and packages for analysis
+```{r Loading files and packages}
+library(effectsize)
+library(ggplot2)
+library(dplyr)
+
+nBack_exp = read.csv(file = 'n-back_exp_results.csv')
+nBack_exp_RT = read.csv(file = 'n-back_exp_results_RTfiltered.csv')
+
+stim_siteLabs <- c('Vertex', 'DAN', 'FPCN-B')
+names(stim_siteLabs) <- c('vertex', 'DAN', 'FPCNB')
+nBack_Labs <- c('0', '1', '2')
+timepoint_Labs <- c('Pre', 'Post')
+names(timepoint_Labs) <- c('pre', 'post')
+```
+
+Data cleaning for accuracy analysis
+```{r General data cleaning, echo=FALSE}
+# changing relevant variables to factors
+nBack_exp$n_back <- as.factor(nBack_exp$n_back)
+nBack_exp$trialN <- as.factor(nBack_exp$trialN)
+nBack_exp$counterbalance <- as.factor(nBack_exp$counterbalance)
+nBack_exp$sessionNum <- as.factor(nBack_exp$sessionNum)
+nBack_exp$timepoint <- as.factor(nBack_exp$timepoint)
+nBack_exp$stim_site <- as.factor(nBack_exp$stim_site)
+```
+
+Effect size analysis for accuracy - Cohen's D
+```{r Effect size analysis for accuracy, echo=FALSE}
+cohens_d(Pair(correct[timepoint == 'pre'], correct[timepoint == 'post']) ~ 1, data = nBack_exp)
+
+hedges_g(Pair(correct[timepoint == 'pre'], correct[timepoint == 'post']) ~ 1, data = nBack_exp)
+```
+
+Effect size analysis for reaction time - Cohen's D
+```{r Effect size analysis for accuracy, echo=FALSE}
+cohens_d(Pair(rt[timepoint == 'pre'], rt[timepoint == 'post']) ~ 1, data = nBack_exp)
+
+hedges_g(Pair(rt[timepoint == 'pre'], rt[timepoint == 'post']) ~ 1, data = nBack_exp)
+```
