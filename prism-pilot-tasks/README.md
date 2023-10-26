@@ -10,7 +10,8 @@ Scripts were written in:
 * MATLAB
 * Python
 
-## Setup: To run tasks download the repository to your desired directory.
+## Setup: 
+To run tasks download the repository to your desired directory.
 a. Navon and Stroop:
 The Navon and Stroop tasks need to be loaded from MATLAB.
 1) Open MATLAB and make the working directory the path to the `PRISM_Pilot_Tasks/` folder located in the repo. 
